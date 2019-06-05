@@ -20,7 +20,9 @@ export class BlockchainService {
     return this.BlockchainInstance.chain;
   }
 
-  
+  public addTransaction(tx){
+    this.BlockchainInstance.addTransaction(tx);
+  }
 
   private generateWaletKeys(){
     const ec = new EC.ec('secp256k1');
