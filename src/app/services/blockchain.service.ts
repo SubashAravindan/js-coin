@@ -16,21 +16,31 @@ export class BlockchainService {
 
   }
 
-  public getBlocks(){
+  public getBlocks() {
     return this.BlockchainInstance.chain;
   }
 
-  public addTransaction(tx){
+  public addTransaction(tx) {
     this.BlockchainInstance.addTransaction(tx);
   }
 
-  private generateWaletKeys(){
+  public getPendingTransactions() {
+    return this.BlockchainInstance.pendingTransactions;
+  }
+
+  public minePendingTransactions() {
+    this.BlockchainInstance.minePendingTransactions(
+      this.waletKeys[0].publicKey
+    )
+  }
+
+  private generateWaletKeys() {
     const ec = new EC.ec('secp256k1');
     const key = ec.genKeyPair();
     this.waletKeys.push({
-      keyObj:key,
-      publicKey:key.getPublic('hex'),
-      privateKey:key.getPrivate('hex')
+      keyObj: key,
+      publicKey: key.getPublic('hex'),
+      privateKey: key.getPrivate('hex')
 
     })
   }
